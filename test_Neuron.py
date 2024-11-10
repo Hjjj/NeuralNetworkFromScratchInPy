@@ -29,5 +29,38 @@ class TestNeuron(unittest.TestCase):
         expected_output = 1 / (1 + math.exp(-x))
         self.assertAlmostEqual(neuron.sigmoid(x), expected_output)
 
+        def test_sigmoid_derivative(self):
+            neuron = Neuron([], 0)
+            x = 0
+            sigmoid_value = neuron.sigmoid(x)
+            expected_output = sigmoid_value * (1 - sigmoid_value)
+            self.assertAlmostEqual(neuron.sigmoid_derivative(x), expected_output)
+        
+        def test_relu(self):
+            neuron = Neuron([], 0)
+            x = 1
+            expected_output = max(0, x)
+            self.assertEqual(neuron.relu(x), expected_output)
+        
+        def test_relu_derivative(self):
+            neuron = Neuron([], 0)
+            x = 1
+            expected_output = 1 if x > 0 else 0
+            self.assertEqual(neuron.relu_derivative(x), expected_output)
+        
+        def test_tanh(self):
+            neuron = Neuron([], 0)
+            x = 0
+            expected_output = math.tanh(x)
+            self.assertAlmostEqual(neuron.tanh(x), expected_output)
+        
+        def test_tanh_derivative(self):
+            neuron = Neuron([], 0)
+            x = 0
+            expected_output = 1 - math.tanh(x) ** 2
+            self.assertAlmostEqual(neuron.tanh_derivative(x), expected_output)
+
+
+
 if __name__ == '__main__':
     unittest.main()

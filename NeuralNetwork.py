@@ -1,4 +1,5 @@
 import math
+from Neuron import Neuron
 
 class NeuralNetwork(object):
     def __init__(self, input_size, hidden_size, output_size):
@@ -24,9 +25,13 @@ class NeuralNetwork(object):
         """
         Perform forward propagation through the network.
         """
+        # Calculate hidden layer outputs
         hidden_outputs = [neuron.activate(inputs) for neuron in self.hidden_neurons]
-        final_outputs = [neuron.activate(hidden_outputs) for neuron in self.output_neurons]
-        return hidden_outputs, final_outputs
+        
+        # Calculate output layer outputs
+        output_outputs = [neuron.activate(hidden_outputs) for neuron in self.output_neurons]
+        
+        return hidden_outputs, output_outputs
 
     def predict(self, inputs):
         """
@@ -65,7 +70,7 @@ class NeuralNetwork(object):
                         self.hidden_neurons[i].weights[j] += learning_rate * hidden_errors[i] * inputs[j]
                     self.hidden_neurons[i].bias += learning_rate * hidden_errors[i]
 
-# Example usage
+""" # Example usage
 input_size = 3
 hidden_size = 2
 output_size = 1
@@ -90,3 +95,4 @@ nn.train(features, expected_outputs, learning_rate=0.1, epochs=1000)
 inputs = [1.0, 0.5, -1.5]
 output = nn.predict(inputs)
 print(output)
+ """

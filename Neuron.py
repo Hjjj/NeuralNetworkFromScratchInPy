@@ -20,6 +20,37 @@ class Neuron(object):
         """
         return 1 / (1 + math.exp(-x))
 
+    def sigmoid_derivative(self, x):
+        """
+        Derivative of the sigmoid activation function.
+        """
+        sigmoid_value = self.sigmoid(x)
+        return sigmoid_value * (1 - sigmoid_value)
+    
+    def relu(self, x):
+        """
+        ReLU activation function.
+        """
+        return max(0, x)
+
+    def relu_derivative(self, x):
+        """
+        Derivative of the ReLU activation function.
+        """
+        return 1 if x > 0 else 0
+    
+    def tanh(self, x):
+        """
+        Tanh activation function.
+        """
+        return math.tanh(x)
+
+    def tanh_derivative(self, x):
+        """
+        Derivative of the tanh activation function.
+        """
+        return 1 - math.tanh(x) ** 2
+
 
 
 
