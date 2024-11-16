@@ -59,7 +59,12 @@ class TestNeuron(unittest.TestCase):
             x = 0
             expected_output = 1 - math.tanh(x) ** 2
             self.assertAlmostEqual(neuron.tanh_derivative(x), expected_output)
-
+            def test_sigmoid_derivative(self):
+                neuron = Neuron([], 0)
+                x = 0
+                sigmoid_value = neuron.sigmoid(x)
+                expected_output = sigmoid_value * (1 - sigmoid_value)
+                self.assertAlmostEqual(neuron.sigmoid_derivative(x), expected_output)
 
 
 if __name__ == '__main__':

@@ -18,7 +18,12 @@ class Neuron(object):
         """
         Sigmoid activation function.
         """
-        return 1 / (1 + math.exp(-x))
+        if x >= 0:
+            z = math.exp(-x)
+            return 1 / (1 + z)
+        else:
+            z = math.exp(x)
+            return z / (1 + z)
 
     def sigmoid_derivative(self, x):
         """

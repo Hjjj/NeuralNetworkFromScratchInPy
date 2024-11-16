@@ -54,6 +54,8 @@ class NeuralNetwork(object):
 
                 # Backpropagate the error to the hidden layer
                 hidden_errors = [0] * len(self.hidden_neurons)
+
+
                 for i in range(len(self.hidden_neurons)):
                     error = sum(output_errors[j] * self.output_neurons[j].weights[i] for j in range(len(self.output_neurons)))
                     hidden_errors[i] = error * self.hidden_neurons[i].sigmoid_derivative(hidden_outputs[i])
@@ -69,30 +71,3 @@ class NeuralNetwork(object):
                     for j in range(len(self.hidden_neurons[i].weights)):
                         self.hidden_neurons[i].weights[j] += learning_rate * hidden_errors[i] * inputs[j]
                     self.hidden_neurons[i].bias += learning_rate * hidden_errors[i]
-
-""" # Example usage
-input_size = 3
-hidden_size = 2
-output_size = 1
-
-nn = NeuralNetwork(input_size, hidden_size, output_size)
-
-# Set weights and biases for hidden neurons
-nn.set_weights('hidden', 0, [0.2, 0.8, -0.5], 0.1)
-nn.set_weights('hidden', 1, [0.5, -0.91, 0.26], -0.2)
-
-# Set weights and biases for output neurons
-nn.set_weights('output', 0, [0.1, -0.3], 0.3)
-
-# Training data
-features = [[1.0, 0.5, -1.5], [0.5, -1.0, 1.5]]
-expected_outputs = [[0.5], [0.1]]
-
-# Train the network
-nn.train(features, expected_outputs, learning_rate=0.1, epochs=1000)
-
-# Predict output for given inputs
-inputs = [1.0, 0.5, -1.5]
-output = nn.predict(inputs)
-print(output)
- """
